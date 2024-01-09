@@ -1,0 +1,19 @@
+body{
+    display:flex;
+    flex-direction: row;
+}
+.sidebar{
+    flex-direction: column;
+}
+.search{
+    flex-direction: row;
+}
+.previous{
+    flex-direction: column;
+}
+.results{
+    flex-direction: column;
+}
+.forecast{
+    flex-direction: row;
+}
