@@ -11,7 +11,8 @@ const humidity = document.querySelector('#humidity')
 const forecast = document.querySelector('#forecast')
 const key = '1340be71494f66ddb1b4ff4f454d3b17'
 
-const searchPrevious = async(btn) => {
+//retrieves weather information from the api
+const search = async(btn) => {
     let geocode;
     if(input.value){
         geocode = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${btn.value}&limit=1&appid=${key}`)
@@ -57,7 +58,8 @@ const searchPrevious = async(btn) => {
     input.value = ""
 }
 
-const search = async() => {
+//calls the search function when the 'Search City' button is clicked
+const searchButton = async() => {
     if(input.value){
         searchPrevious(input)
         if(previousSearches){
@@ -79,13 +81,14 @@ const search = async() => {
             let city = document.createElement('button')
             city.textContent = searches[i]
             previous.appendChild(city)
-            city.addEventListener('click', () => {searchPrevious(city)})
+            city.addEventListener('click', () => {search(city)})
         }
     }
 }
 
-submit.addEventListener('click', search)
+submit.addEventListener('click', searchButton)
 
+//loads previous searches
 const loadPrevious = () => {
     if(previousSearches){
         const searches = previousSearches.split(',')
