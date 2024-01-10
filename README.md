@@ -25,3 +25,4 @@ N/A
 https://gbell76.github.io/Weather/
 
 ## Screenshots
+![Alt text](<assets/Screenshot 2024-01-10 142143.png>)

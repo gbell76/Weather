@@ -38,7 +38,7 @@ const search = async(btn) => {
     const forecastData = await forecastResponse.json()
     for(i = 0; i < 5; i++){
         const day = document.createElement('div')
-        const date = document.createElement('p')
+        const date = document.createElement('h2')
         date.textContent = dayjs().add(i+1, 'day').format('dddd, MMMM D, YYYY')
         day.appendChild(date)
         const dailyIcon = document.createElement('img')
@@ -61,7 +61,7 @@ const search = async(btn) => {
 //calls the search function when the 'Search City' button is clicked
 const searchButton = async() => {
     if(input.value){
-        searchPrevious(input)
+        search(input)
         if(previousSearches){
             const searches = previousSearches.split(',')
             if(!searches.includes(input.value)){

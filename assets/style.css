@@ -1,19 +1,33 @@
+body #sidebar #search{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+body #sidebar{
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+}
+
+body #sidebar button{
+    width: 100%;
+}
+
+body #sidebar #search #submit{
+    width: 25%;
+}
+
+body #sidebar #search #input{
+    width: 75%;
+}
+
+body #results #forecast{
+    display: flex;
+    flex-direction: row;
+}
+
 body{
-    display:flex;
-    flex-direction: row;
-}
-.sidebar{
-    flex-direction: column;
-}
-.search{
-    flex-direction: row;
-}
-.previous{
-    flex-direction: column;
-}
-.results{
-    flex-direction: column;
-}
-.forecast{
+    display: flex;
     flex-direction: row;
 }
