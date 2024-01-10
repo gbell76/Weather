@@ -96,7 +96,7 @@ const loadPrevious = () => {
             let city = document.createElement('button')
             city.textContent = searches[i]
             previous.appendChild(city)
-            city.addEventListener('click', () => {searchPrevious(city)})
+            city.addEventListener('click', () => {search(city)})
         }
     }
 }
