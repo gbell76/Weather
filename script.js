@@ -16,10 +16,10 @@ const search = async(btn) => {
     let geocode;
     if(input.value){
         geocode = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${btn.value}&limit=1&appid=${key}`)
-        cityName.textContent = btn.value + ' ' + dayjs().format('dddd, MMMM D, YYYY')
+        cityName.textContent = btn.value + ' (' + dayjs().format('dddd, MMMM D, YYYY') + ')'
     }else{
         geocode = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${btn.textContent}&limit=1&appid=${key}`)
-        cityName.textContent = btn.textContent + ' ' + dayjs().format('dddd, MMMM D, YYYY')
+        cityName.textContent = btn.textContent + ' (' + dayjs().format('dddd, MMMM D, YYYY') + ')'
     }
     const geoData = await geocode.json()
     const lat = geoData[0].lat
