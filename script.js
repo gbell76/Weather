@@ -27,13 +27,33 @@ const searchPrevious = async(btn) => {
     const weatherData = await weatherResponse.json()
     icon.src = 'http://openweathermap.org/img/w/' + weatherData.weather[0].icon + '.png'
     weather.textContent = 'Weather: ' + weatherData.weather[0].main
-    temperature.textContent = 'Temperature: ' + weatherData.main.temp
+    temperature.textContent = 'Temperature: ' + weatherData.main.temp + ' degrees F'
     wind.textContent = 'Wind Speed: ' + weatherData.wind.speed + 'mph'
-    humidity.textContent = 'Humidity: ' + weatherData.main.humidity
+    humidity.textContent = 'Humidity: ' + weatherData.main.humidity + '%'
     while(forecast.firstChild){
         forecast.removeChild(forecast.firstChild)
     }
-    //forecast api call
+    const forecastResponse = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}&units=imperial`)
+    const forecastData = await forecastResponse.json()
+    for(i = 0; i < 5; i++){
+        const day = document.createElement('div')
+        const date = document.createElement('p')
+        date.textContent = dayjs().add(i+1, 'day').format('dddd, MMMM D, YYYY')
+        day.appendChild(date)
+        const dailyIcon = document.createElement('img')
+        dailyIcon.src = 'http://openweathermap.org/img/w/' + forecastData.list[i].weather[0].icon + '.png'
+        day.appendChild(dailyIcon)
+        const dailyTemperature = document.createElement('p')
+        dailyTemperature.textContent = 'Temperature: ' + forecastData.list[i].main.temp + ' degrees F'
+        day.appendChild(dailyTemperature)
+        const dailyWind = document.createElement('p')
+        dailyWind.textContent = 'Wind Speed: ' + forecastData.list[i].wind.speed + 'mph'
+        day.appendChild(dailyWind)
+        const dailyHumidity = document.createElement('p')
+        dailyHumidity.textContent = 'Humidity: ' + forecastData.list[i].main.humidity + '%'
+        day.append(dailyHumidity)
+        forecast.appendChild(day)
+    }
     input.value = ""
 }
 
