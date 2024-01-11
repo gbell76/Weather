@@ -15,10 +15,10 @@ const key = '1340be71494f66ddb1b4ff4f454d3b17'
 const search = async(btn) => {
     let geocode;
     if(input.value){
-        geocode = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${btn.value}&limit=1&appid=${key}`)
+        geocode = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${btn.value}&limit=1&appid=${key}`)
         cityName.textContent = btn.value + ' (' + dayjs().format('dddd, MMMM D, YYYY') + ')'
     }else{
-        geocode = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${btn.textContent}&limit=1&appid=${key}`)
+        geocode = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${btn.textContent}&limit=1&appid=${key}`)
         cityName.textContent = btn.textContent + ' (' + dayjs().format('dddd, MMMM D, YYYY') + ')'
     }
     const geoData = await geocode.json()
@@ -26,7 +26,7 @@ const search = async(btn) => {
     const lon = geoData[0].lon
     const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=imperial`)
     const weatherData = await weatherResponse.json()
-    icon.src = 'http://openweathermap.org/img/w/' + weatherData.weather[0].icon + '.png'
+    icon.src = 'https://openweathermap.org/img/w/' + weatherData.weather[0].icon + '.png'
     weather.textContent = 'Weather: ' + weatherData.weather[0].main
     temperature.textContent = 'Temperature: ' + weatherData.main.temp + ' degrees F'
     wind.textContent = 'Wind Speed: ' + weatherData.wind.speed + 'mph'
@@ -34,7 +34,7 @@ const search = async(btn) => {
     while(forecast.firstChild){
         forecast.removeChild(forecast.firstChild)
     }
-    const forecastResponse = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}&units=imperial`)
+    const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}&units=imperial`)
     const forecastData = await forecastResponse.json()
     for(i = 0; i < 5; i++){
         const day = document.createElement('div')
@@ -42,7 +42,7 @@ const search = async(btn) => {
         date.textContent = dayjs().add(i+1, 'day').format('dddd, MMMM D, YYYY')
         day.appendChild(date)
         const dailyIcon = document.createElement('img')
-        dailyIcon.src = 'http://openweathermap.org/img/w/' + forecastData.list[i].weather[0].icon + '.png'
+        dailyIcon.src = 'https://openweathermap.org/img/w/' + forecastData.list[i].weather[0].icon + '.png'
         day.appendChild(dailyIcon)
         const dailyTemperature = document.createElement('p')
         dailyTemperature.textContent = 'Temperature: ' + forecastData.list[i].main.temp + ' degrees F'
